@@ -80,7 +80,7 @@ move_timemator_data() {
   echo "Move TimeMator data to timemator_data.csv:"
   echo "Press enter when done"
   wait_for_enter
-  # python assets/timemator_reader.py >assets/fees.tex
+  python assets/timemator_reader.py >assets/fees.tex
 }
 
 build_pdf() {

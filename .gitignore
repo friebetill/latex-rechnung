@@ -130,5 +130,7 @@ sympy-plots-for-*.tex/
 # Personal data
 assets/customers/*
 assets/customer
+assets/personal_data.tex
 timemator_data.csv
-make.pdf
+main.pdf
+
