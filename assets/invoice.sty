@@ -12,14 +12,14 @@
 %
 % Corrections, suggestions and contributions by:
 %%%%%%
-% 
+%
 % Some of the following contributions came years ago, others quite
 % recently:
 %
 % Spanish: Juanjo <jj.hfmc@gmail.com> and Lee Rudolph <lrudolph@panix.com>
 %
 % Corrections of Italian orthography: Paolo Cusinu <paolo.cusinu@gmail.com>
-% 
+%
 % Estonian and a patch for using fp: Priit Laes <plaes@plaes.org>
 %
 % Another patch for fp: AFresh1, March 2011 % e-mail: andrew@afresh1.com
@@ -33,9 +33,9 @@
 %   Contributed labels in Italian.
 %
 %%%%%%
-% O. Corff, July 2003 
-% 
-%   fixed one nasty spacing bug, simplified internal table 
+% O. Corff, July 2003
+%
+%   fixed one nasty spacing bug, simplified internal table
 %   construction (table now has five instead of six columns,
 %   the second of which was never used).
 %
@@ -50,7 +50,7 @@
 %
 %%%%%%
 % Robin Fairbairns, December 6, 2001
-% 
+%
 %   Hinted that the dollar sign can also be printed by saying
 %   \string$.
 %
@@ -82,10 +82,10 @@
 %   some calculations failed with the \Fee{title}{rate}{amount}
 %   where \rate is not an integer
 %
-%   another fix is that in my opinion the VAT line should be 
+%   another fix is that in my opinion the VAT line should be
 %   printed also even though only one project is specified
 %
-%   third fix is that the subtotal-line should not be printed 
+%   third fix is that the subtotal-line should not be printed
 %   on a project with only one \Fee line
 %
 %%%%%%
@@ -150,7 +150,7 @@
 \RequirePackage{longtable}
 \RequirePackage{calc}
 \usepackage{fp}
-\input{invoice.def}
+\input{assets/invoice.def}
 %
 \newcommand{\InvoiceVersion}{0.9}%
 \newcounter{Fee}		%
@@ -230,9 +230,9 @@
 		%
 	\else \error@message{\NoInvoiceNesting}%
 	\fi}%
-% At the end of environment: 
+% At the end of environment:
 % Yields state 8->0, Close and complete invoice, finish tables, etc.
-{% 
+{%
 	\ifcase\Flag % 0: Invoice not started yet
 		%
 		\error@message{\MissingOpening}%
@@ -448,7 +448,7 @@
 	\fi%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\EBC}[2]{% Yields state 5: Expenses in BaseCurrency 
+\newcommand{\EBC}[2]{% Yields state 5: Expenses in BaseCurrency
 	%
 	% #1 Contents und Datum
 	% #2 Amount in BaseCurrency
@@ -483,7 +483,7 @@
 		%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\or	% 5: Expense item
-		%   
+		%
 		\Expense@BaseCurrency{#1}{#2}%
 		%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -501,11 +501,11 @@
 	\fi%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\EBCi}[2]{% Yields state 5: Expenses in BaseCurrency 
+\newcommand{\EBCi}[2]{% Yields state 5: Expenses in BaseCurrency
 	%				But, unlike base form (no
 	%				'invisible') this version does
 	%				not state the item, it only
-	%				the total amount of expenses. 
+	%				the total amount of expenses.
 	%
 	% #1 Contents und Datum
 	% #2 Amount in BaseCurrency
@@ -540,7 +540,7 @@
 		%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\or	% 5: Expense item
-		%   
+		%
 		\Expense@Base@Currency{#1}{#2}%
 		%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -627,7 +627,7 @@
 	%				But, unlike base form (no
 	%				'invisible') this version does
 	%				not state the item, it only
-	%				the total amount of expenses. 
+	%				the total amount of expenses.
 	%
 	% #1 Contents und Datum
 	% #2 Currency
@@ -991,7 +991,7 @@
 	%\multicolumn{4}{l}{\SubtotalProject}%
 	%\let\Project\NewProject%
 	%&
-	%\SubtotalProject &	&	&	& 
+	%\SubtotalProject &	&	&	&
 			\addtocounter{ST@Project}{\theST@Fee}%
 			\addtocounter{ST@Project}{\theST@VAT}%
 			\addtocounter{ST@Project}{\theST@Expenses}%
@@ -1006,16 +1006,16 @@
 \newcommand{\Tot@l}{%
 	\\\hline
 	\ifnum\theFee>0 \SumFees&	&	&	&%
-				\Print@Value{\theFee}\\ 
+				\Print@Value{\theFee}\\
 		\ifVATnonzero%
 			\Total@VAT@Printout%
 		\fi%
 	\fi%
 	\ifnum\theExpenses>0 \SumExpenses&	&	&	&%
-				\Print@Value{\theExpenses}\\ 
+				\Print@Value{\theExpenses}\\
 	\fi%
 	\ifnum\theDiscount<0 \Discount@Contents&	&	&	&%
-				\Print@Value{\theDiscount}\\ 
+				\Print@Value{\theDiscount}\\
 	\fi%
 	\hline\hline
 	\textbf{\Total} &	&	&	&%

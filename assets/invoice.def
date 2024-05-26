@@ -3,7 +3,7 @@
 %	File: invoice.def
 %	Author: Oliver Corff
 %	Date: 2003-12-12
-%	
+%
 %	This file contains messages, labels etc. in English, German
 %	and other languages.
 %
@@ -14,7 +14,7 @@
 % 	This file is the only file of this package which may be
 %	modified without renaming it.
 %
-%	Adding a new language to labels is simple. Follow the 
+%	Adding a new language to labels is simple. Follow the
 %	instructions at line 275 of this file, and, please!,
 %	do not forget to send the result to
 %
@@ -154,25 +154,25 @@
 		Language \string\l@afrikaans\space unknown.^^J^^J}
 \else
 \ifnum\number\invoice@language=\number\l@afrikaans
-	\def\Warning			{Waarskuwing}  
-	\def\Error			{Fout}  
-	\def\Expense			{Onkostes}  
-	\def\Amount			{Bedrag}  
-	\def\Currency			{Valuta}  
-	\def\Factor			{Faktor}  
-	\def\Activity			{Aktiwiteit}  
-	\def\Count			{Aantal ure}  
-	\def\UnitRate			{Tarief}  
-	\def\Fees			{Fooie}  
-	\def\VAT			{BTW}  
-	\def\Expenses			{Uitgawes}  
-	\def\SumFees			{Totaal Fooie}  
-	\def\SumVAT			{Totaal BTW}  
-	\def\SumExpenses		{Totaal Uitgawes}  
-	\def\SubtotalFee		{Subtotaal \Fees} 
-	\def\SubtotalExpenses		{Subtotaal \Expenses}  
-	\def\SubtotalProject		{Subtotaal \Project}  
-	\def\Total			{Totaal}  
+	\def\Warning			{Waarskuwing}
+	\def\Error			{Fout}
+	\def\Expense			{Onkostes}
+	\def\Amount			{Bedrag}
+	\def\Currency			{Valuta}
+	\def\Factor			{Faktor}
+	\def\Activity			{Aktiwiteit}
+	\def\Count			{Aantal ure}
+	\def\UnitRate			{Tarief}
+	\def\Fees			{Fooie}
+	\def\VAT			{BTW}
+	\def\Expenses			{Uitgawes}
+	\def\SumFees			{Totaal Fooie}
+	\def\SumVAT			{Totaal BTW}
+	\def\SumExpenses		{Totaal Uitgawes}
+	\def\SubtotalFee		{Subtotaal \Fees}
+	\def\SubtotalExpenses		{Subtotaal \Expenses}
+	\def\SubtotalProject		{Subtotaal \Project}
+	\def\Total			{Totaal}
 \fi\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This is Dutch.
@@ -183,24 +183,24 @@
 \else
 \ifnum\number\invoice@language=\number\l@dutch
 	\def\Warning			{Waarschuwing}%
-	\def\Error			{Fout}% 
-	\def\Expense			{Onkosten}% 
-	\def\Amount			{Bedrag}% 
-	\def\Currency			{Valuta}% 
-	\def\Factor			{Faktor}% 
-	\def\Activity			{Activiteit}% 
-	\def\Count			{Aantal}% 
-	\def\UnitRate			{Prijs/Eenheid}% 
-	\def\Fees			{Honorarium}% 
-	\def\VAT			{BTW}% 
-	\def\Expenses			{Onkosten}% 
-	\def\SumFees			{Totaal \Fees}% 
-	\def\SumVAT			{Totaal \VAT}% 
-	\def\SumExpenses		{Totaal \Expenses}% 
-	\def\SubtotalFee		{Subtotaal \Fees}% 
-	\def\SubtotalExpenses		{Subtotaal \Expenses}% 
-	\def\SubtotalProject		{Subtotaal \Project}% 
-	\def\Total			{Totaal}% 
+	\def\Error			{Fout}%
+	\def\Expense			{Onkosten}%
+	\def\Amount			{Bedrag}%
+	\def\Currency			{Valuta}%
+	\def\Factor			{Faktor}%
+	\def\Activity			{Activiteit}%
+	\def\Count			{Aantal}%
+	\def\UnitRate			{Prijs/Eenheid}%
+	\def\Fees			{Honorarium}%
+	\def\VAT			{BTW}%
+	\def\Expenses			{Onkosten}%
+	\def\SumFees			{Totaal \Fees}%
+	\def\SumVAT			{Totaal \VAT}%
+	\def\SumExpenses		{Totaal \Expenses}%
+	\def\SubtotalFee		{Subtotaal \Fees}%
+	\def\SubtotalExpenses		{Subtotaal \Expenses}%
+	\def\SubtotalProject		{Subtotaal \Project}%
+	\def\Total			{Totaal}%
 \fi\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This is Estonian
@@ -237,24 +237,24 @@
 \else
 \ifnum\number\invoice@language=\number\l@finnish
 	\def\Warning			{Varoitus} % Enter translations here!
-	\def\Error			{Virhe} % 
-	\def\Expense			{Kulu} % 
-	\def\Amount			{Summa} % 
-	\def\Currency			{Valuutta} % 
-	\def\Factor			{Kerroin} % 
-	\def\Activity			{Laskutusperuste} % 
-	\def\Count			{Määrä} % 
-	\def\UnitRate			{Yksikköhinta} % 
-	\def\Fees			{Työt} % 
-	\def\VAT			{ALV} % 
-	\def\Expenses			{Kulut} % 
-	\def\SumFees			{Työt yhteensä} % 
-	\def\SumVAT			{ALV yhteensä} % 
-	\def\SumExpenses		{Kulut yhteensä} % 
-	\def\SubtotalFee		{Työt välisumma} % 
-	\def\SubtotalExpenses		{Kulut välisumma} % 
-	\def\SubtotalProject		{Välisumma} % 
-	\def\Total			{Yhteensä} % 
+	\def\Error			{Virhe} %
+	\def\Expense			{Kulu} %
+	\def\Amount			{Summa} %
+	\def\Currency			{Valuutta} %
+	\def\Factor			{Kerroin} %
+	\def\Activity			{Laskutusperuste} %
+	\def\Count			{Määrä} %
+	\def\UnitRate			{Yksikköhinta} %
+	\def\Fees			{Työt} %
+	\def\VAT			{ALV} %
+	\def\Expenses			{Kulut} %
+	\def\SumFees			{Työt yhteensä} %
+	\def\SumVAT			{ALV yhteensä} %
+	\def\SumExpenses		{Kulut yhteensä} %
+	\def\SubtotalFee		{Työt välisumma} %
+	\def\SubtotalExpenses		{Kulut välisumma} %
+	\def\SubtotalProject		{Välisumma} %
+	\def\Total			{Yhteensä} %
 \fi\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This is French.
@@ -300,7 +300,7 @@
 	\def\Factor			{Faktor}%
 	\def\Activity			{Bezeichnung}%
 	\def\Count			{Anzahl}%
-	\def\UnitRate			{Preis/Stunde}%
+	\def\UnitRate			{Preis}%
 	\def\Fees			{Dienstleistungen}%
 	\def\VAT			{MWSt.}%
 	\def\Expenses			{Auslagen}%
@@ -453,7 +453,7 @@
 	\def\Total			{Slutsumma}%
 \fi\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
 % How to add new label languages to the `invoice' package:
 %
 % 1. Copy all following lines after this explanation
@@ -480,22 +480,22 @@
 %\else
 %\ifnum\number\invoice@language=\number\l@german
 %	\def\Warning			{} % Enter translations here!
-%	\def\Error			{} % 
-%	\def\Expense			{} % 
-%	\def\Amount			{} % 
-%	\def\Currency			{} % 
-%	\def\Factor			{} % 
-%	\def\Activity			{} % 
-%	\def\Count			{} % 
-%	\def\UnitRate			{} % 
-%	\def\Fees			{} % 
-%	\def\VAT			{} % 
-%	\def\Expenses			{} % 
-%	\def\SumFees			{} % 
-%	\def\SumVAT			{} % 
-%	\def\SumExpenses		{} % 
-%	\def\SubtotalFee		{} % 
-%	\def\SubtotalExpenses		{} % 
-%	\def\SubtotalProject		{} % 
-%	\def\Total			{} % 
+%	\def\Error			{} %
+%	\def\Expense			{} %
+%	\def\Amount			{} %
+%	\def\Currency			{} %
+%	\def\Factor			{} %
+%	\def\Activity			{} %
+%	\def\Count			{} %
+%	\def\UnitRate			{} %
+%	\def\Fees			{} %
+%	\def\VAT			{} %
+%	\def\Expenses			{} %
+%	\def\SumFees			{} %
+%	\def\SumVAT			{} %
+%	\def\SumExpenses		{} %
+%	\def\SubtotalFee		{} %
+%	\def\SubtotalExpenses		{} %
+%	\def\SubtotalProject		{} %
+%	\def\Total			{} %
 %\fi\fi

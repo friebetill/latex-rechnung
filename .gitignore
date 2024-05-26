@@ -124,3 +124,11 @@ sympy-plots-for-*.tex/
 # WinEdt
 *.bak
 *.sav
+
+.DS_Store
+
+# Personal data
+assets/customers/*
+assets/customer
+timemator_data.csv
+make.pdf
