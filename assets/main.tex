@@ -76,16 +76,20 @@
 
 
 \begin{document}
-	\begin{letter}{\customerCompany \\ \customerName \\
-	\customerStreet \\ \customerZIP \ \customerCity %\\ \customerCountry
+	\begin{letter}{
+		\ifthenelse{\equal{\customerCompany}{}}{}{\customerCompany \\}
+		\customerName \\
+		\customerStreet \\
+		\customerZIP \
+		\customerCity %\\ \customerCountry
 	}
-			\includegraphics[width=0.15\textwidth]{assets/logo.png}
-			\opening{\invoiceSalutation}
-			\invoiceText
-		    \begin{invoice}{Euro}{19}
-				\ProjectTitle{Projekttitel} %
-				\fees
-		    \end{invoice}
+		\includegraphics[width=0.15\textwidth]{assets/logo.png}
+		\opening{\invoiceSalutation}
+		\invoiceText
+		\begin{invoice}{Euro}{19}
+			\ProjectTitle{Projekttitel} %
+			\fees
+		\end{invoice}
 		Leistungszeitraum: \performancePeriod
 
 		% \ps Im ausgewiesenen Betrag ist gemäß § 19 UStG keine Umsatzsteuer enthalten.
@@ -94,6 +98,5 @@
 		\renewcommand*{\raggedsignature}{\raggedright}
 		\closing{\invoiceClosing}
 		\invoiceEnclosures
-
 	\end{letter}
 \end{document}

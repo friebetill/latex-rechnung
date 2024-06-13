@@ -83,6 +83,25 @@ move_timemator_data() {
   python assets/timemator_reader.py >assets/fees.tex
 }
 
+prompt_fees_data() {
+  local fees_file="assets/fees.tex"
+
+  echo "Enter task description:"
+  read -r taskDescription
+
+  echo "Enter hourly rate:"
+  read -r hourlyRate
+
+  echo "Enter total duration (in decimal hours):"
+  read -r totalDuration
+
+  echo "\\newcommand{\\fees}{" >"${fees_file}"
+  echo "  \\Fee{${taskDescription}}{${hourlyRate}}{${totalDuration}}" >>"${fees_file}"
+  echo "}" >>"${fees_file}"
+
+  echo "Fees data file created at ${fees_file}"
+}
+
 build_pdf() {
   echo "Press ENTER to build the pdf:"
   wait_for_enter
@@ -115,7 +134,23 @@ main() {
 
   prompt_invoice_data
 
-  move_timemator_data
+  echo "Do you want to (1) move TimeMator data or (2) enter fees data directly?"
+  select choice in "Move TimeMator Data" "Enter Fees Data"; do
+    case $REPLY in
+    1)
+      move_timemator_data
+      break
+      ;;
+    2)
+      prompt_fees_data
+      break
+      ;;
+    *)
+      echo "Invalid option. Please select 1 or 2."
+      ;;
+    esac
+  done
+
   build_pdf
 
   echo "Done."
