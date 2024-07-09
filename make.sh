@@ -84,18 +84,27 @@ move_timemator_data() {
 
 prompt_fees_data() {
   local fees_file="assets/fees.tex"
-
-  echo "Enter task description:"
-  read -r taskDescription
-
-  echo "Enter hourly rate:"
-  read -r hourlyRate
-
-  echo "Enter total duration (in decimal hours):"
-  read -r totalDuration
+  local taskDescription hourlyRate totalDuration addMore="y"
 
   echo "\\newcommand{\\fees}{" >"${fees_file}"
-  echo "  \\Fee{${taskDescription}}{${hourlyRate}}{${totalDuration}}" >>"${fees_file}"
+
+  while [[ $addMore == "y" ]]; do
+    echo "Enter task description:"
+    read -re taskDescription
+
+    echo "Enter hourly rate:"
+    read -re hourlyRate
+
+    echo "Enter total duration (in decimal hours):"
+    read -re totalDuration
+
+    echo "  \\Fee{${taskDescription}}{${hourlyRate}}{${totalDuration}}" >>"${fees_file}"
+
+    echo "Do you want to add another entry? (y/n):"
+    read -re addMore
+    addMore=${addMore:-n}
+  done
+
   echo "}" >>"${fees_file}"
 
   echo "Fees data file created at ${fees_file}"
