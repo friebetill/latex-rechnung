@@ -6,18 +6,18 @@ wait_for_enter() {
 
 create_new_customer() {
   echo "Enter customer company name:"
-  read -r customerCompany
+  read -re customerCompany
   echo "Enter customer name:"
-  read -r customerName
+  read -re customerName
   echo "Enter customer street:"
-  read -r customerStreet
+  read -re customerStreet
   echo "Enter customer ZIP code:"
-  read -r customerZIP
+  read -re customerZIP
   echo "Enter customer city:"
-  read -r customerCity
+  read -re customerCity
 
   echo "Enter file name for the new customer (without extension):"
-  read -r fileName
+  read -re fileName
 
   customerFile="assets/customers/${fileName}.tex"
   echo "\\newcommand{\\customerCompany}{${customerCompany}} %ggf. Firma" >"${customerFile}"
@@ -34,7 +34,6 @@ select_existing_customer() {
   select customerFile in assets/customers/*.tex; do
     if [ -n "$customerFile" ]; then
       cp "${customerFile}" assets/customer.tex
-
       break
     else
       echo "Invalid selection. Please try again."
@@ -53,19 +52,19 @@ prompt_invoice_data() {
   default_performance_period="${start_week} - ${end_week}"
 
   echo "Enter invoice date (format: DD.MM.YYYY) [Default: $default_invoice_date]:"
-  read -r invoiceDate
+  read -re invoiceDate
   invoiceDate=${invoiceDate:-$default_invoice_date}
 
   echo "Enter payment due date (format: DD.MM.YYYY) [Default: $default_pay_date]:"
-  read -r payDate
+  read -re payDate
   payDate=${payDate:-$default_pay_date}
 
   echo "Enter invoice reference number [Default: $default_invoice_reference]:"
-  read -r invoiceReference
+  read -re invoiceReference
   invoiceReference=${invoiceReference:-$default_invoice_reference}
 
   echo "Enter performance period (format: YYYY-WXX - YYYY-WXX) [Default: $default_performance_period]:"
-  read -r performancePeriod
+  read -re performancePeriod
   performancePeriod=${performancePeriod:-$default_performance_period}
 
   echo "\\newcommand{\\invoiceDate}{${invoiceDate}} % Datum der rechnungsstellung" >"${invoice_data_file}"
