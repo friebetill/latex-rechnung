@@ -113,7 +113,19 @@ prompt_fees_data() {
 build_pdf() {
   echo "Press ENTER to build the pdf:"
   wait_for_enter
+
   lualatex assets/main.tex
+
+  # Extract the invoice reference number from the LaTeX file using sed
+  invoiceReference=$(sed -n 's/.*\\newcommand{\\invoiceReference}{\([^}]*\)}.*/\1/p' assets/invoice_data.tex)
+
+  # Rename the output PDF to the invoice reference number
+  if [ -n "$invoiceReference" ]; then
+    mv main.pdf "${invoiceReference}.pdf"
+  else
+    echo "Error: Invoice reference number not found. PDF not renamed."
+  fi
+
   rm assets/customer.tex
   rm assets/fees.tex
   rm assets/invoice_data.tex
