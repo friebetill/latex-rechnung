@@ -86,7 +86,9 @@
 		\includegraphics[width=0.15\textwidth]{assets/logo.png}
 		\opening{\invoiceSalutation}
 		\invoiceText
-		\begin{invoice}{Euro}{19}
+		\ifthenelse{\boolean{applyReverseChargeLaw}}
+			{\begin{invoice}{Euro}{0}}
+			{\begin{invoice}{Euro}{19}}
 			\ProjectTitle{Projekttitel} %
 			\fees
 		\end{invoice}
@@ -94,6 +96,10 @@
 
 		% \ps Im ausgewiesenen Betrag ist gemäß § 19 UStG keine Umsatzsteuer enthalten.
 		% \ps The amount shown does not include sales tax in accordance with § 19 UStG.
+
+		\ifthenelse{\boolean{applyReverseChargeLaw}}
+			  {\ps The reverse charge law applies to this customer.}
+			  {} % Add an empty block for the false condition
 
 		\renewcommand*{\raggedsignature}{\raggedright}
 		\closing{\invoiceClosing}

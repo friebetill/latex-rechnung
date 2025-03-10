@@ -15,6 +15,13 @@ create_new_customer() {
   read -re customerZIP
   echo "Enter customer city:"
   read -re customerCity
+  echo "Apply reverse charge law? (yes/no):"
+  read -re applyReverseChargeLaw
+  if [ "$applyReverseChargeLaw" == "yes" ]; then
+    applyReverseChargeLaw=true
+  else
+    applyReverseChargeLaw=false
+  fi
 
   echo "Enter file name for the new customer (without extension):"
   read -re fileName
@@ -25,6 +32,8 @@ create_new_customer() {
   echo "\\newcommand{\\customerStreet}{${customerStreet}} % Straße" >>"${customerFile}"
   echo "\\newcommand{\\customerZIP}{${customerZIP}} % Postleitzahl" >>"${customerFile}"
   echo "\\newcommand{\\customerCity}{${customerCity}} % Ort" >>"${customerFile}"
+  echo "\\newboolean{applyReverseChargeLaw}" >>"${customerFile}"
+  echo "\\setboolean{applyReverseChargeLaw}{${applyReverseChargeLaw}}" >>"${customerFile}"
 
   cp "${customerFile}" assets/customer.tex
 }
