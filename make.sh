@@ -15,6 +15,7 @@ create_new_customer() {
   read -re customerZIP
   echo "Enter customer city:"
   read -re customerCity
+
   echo "Apply reverse charge law? (yes/no):"
   read -re applyReverseChargeLaw
   if [ "$applyReverseChargeLaw" == "yes" ]; then
@@ -22,6 +23,28 @@ create_new_customer() {
   else
     applyReverseChargeLaw=false
   fi
+
+
+  echo "Select the language for the invoice by entering the corresponding number:"
+  options=("English" "German" "French" "Spanish" "Italian" "Dutch" "Afrikaans" "Estonian" "Finnish" "Swedish")
+
+  PS3="Enter the number corresponding to your choice: "
+
+  select opt in "${options[@]}"; do
+    case $REPLY in
+      1) customerLanguage="english"; break ;;
+      2) customerLanguage="ngerman"; break ;;
+      3) customerLanguage="french"; break ;;
+      4) customerLanguage="spanish"; break ;;
+      5) customerLanguage="italian"; break ;;
+      6) customerLanguage="dutch"; break ;;
+      7) customerLanguage="afrikaans"; break ;;
+      8) customerLanguage="estonian"; break ;;
+      9) customerLanguage="finnish"; break ;;
+      10) customerLanguage="swedish"; break ;;
+      *) echo "Invalid selection. Please enter a number between 1 and ${#options[@]}." ;;
+    esac
+  done
 
   echo "Enter file name for the new customer (without extension):"
   read -re fileName
@@ -34,6 +57,7 @@ create_new_customer() {
   echo "\\newcommand{\\customerCity}{${customerCity}} % Ort" >>"${customerFile}"
   echo "\\newboolean{applyReverseChargeLaw}" >>"${customerFile}"
   echo "\\setboolean{applyReverseChargeLaw}{${applyReverseChargeLaw}}" >>"${customerFile}"
+  echo "\\newcommand{\\customerLanguage}{${customerLanguage}}" >>"${customerFile}"
 
   cp "${customerFile}" assets/customer.tex
 }

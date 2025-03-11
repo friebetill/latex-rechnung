@@ -323,7 +323,7 @@
 	\def\IBAN			{IBAN}%
 	\def\BIC			{BIC}%
 	\def\PerformancePeriodLabel	{Leistungszeitraum}%
-	\def\ReverseChargeLaw		{Das Reverse-Charge-Verfahren gilt für diesen Kunden.}%
+	\def\ReverseChargeLaw		{Die Umsatzsteuer beträgt 0% aufgrund des REVERSE CHARGE-Mechanismus.}%
 	\def\InvoiceNumber		{Rechnungsnummer}%
 	\def\ProjectTitleLabel		{Projekttitel}%
 	\def\InvoiceLabel		{Rechnung}%
@@ -507,7 +507,7 @@
 	\def\IBAN			{IBAN}%
 	\def\BIC			{BIC}%
 	\def\PerformancePeriodLabel	{Performance period}%
-	\def\ReverseChargeLaw		{The reverse charge law applies to this customer.}%
+	\def\ReverseChargeLaw		{The VAT is applied at 0% due to the REVERSE CHARGE mechanism.}%
 	\def\InvoiceNumber		{Invoice Number}%
 	\def\ProjectTitleLabel		{Project Title}%
 	\def\InvoiceLabel		{Invoice}%
