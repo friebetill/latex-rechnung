@@ -64,8 +64,9 @@
 		\ifthenelse{\equal{\customerCompany}{}}{}{\customerCompany \\}
 		\customerName \\
 		\customerStreet \\
-		\customerZIP \
-		\customerCity %\\ \customerCountry
+		\customerZIP, \customerCity \\
+		\ifthenelse{\equal{\customerCountry}{}}{}{\customerCountry \\}
+		\ifthenelse{\equal{\customerVAT}{}}{}{\VATID: \customerVAT}
 	}
 		\includegraphics[width=0.15\textwidth]{assets/logo.png}
 		\opening{\invoiceSalutation}

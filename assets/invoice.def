@@ -319,11 +319,12 @@
 	\def\Email			{E-Mail}%
 	\def\Website			{Webseite}%
 	\def\TaxNumber			{Steuernummer}%
+	\def\VATID			{USt-IdNr.} % Added translation for VAT ID
 	\def\Institute			{Institut}%
 	\def\IBAN			{IBAN}%
 	\def\BIC			{BIC}%
 	\def\PerformancePeriodLabel	{Leistungszeitraum}%
-	\def\ReverseChargeLaw		{Die Umsatzsteuer beträgt 0% aufgrund des REVERSE CHARGE-Mechanismus.}%
+	\def\ReverseChargeLaw		{Die Umsatzsteuer beträgt 0 \% aufgrund des REVERSE CHARGE-Mechanismus.}%
 	\def\InvoiceNumber		{Rechnungsnummer}%
 	\def\ProjectTitleLabel		{Projekttitel}%
 	\def\InvoiceLabel		{Rechnung}%
@@ -503,11 +504,12 @@
 	\def\Email			{Email}%
 	\def\Website			{Website}%
 	\def\TaxNumber			{Tax number}%
+	\def\VATID			{VAT ID} % Added translation for VAT ID
 	\def\Institute			{Institute}%
 	\def\IBAN			{IBAN}%
 	\def\BIC			{BIC}%
 	\def\PerformancePeriodLabel	{Performance period}%
-	\def\ReverseChargeLaw		{The VAT is applied at 0% due to the REVERSE CHARGE mechanism.}%
+	\def\ReverseChargeLaw		{The VAT is applied at 0 \% due to the REVERSE CHARGE mechanism.}%
 	\def\InvoiceNumber		{Invoice Number}%
 	\def\ProjectTitleLabel		{Project Title}%
 	\def\InvoiceLabel		{Invoice}%
