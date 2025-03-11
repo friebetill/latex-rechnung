@@ -8,28 +8,19 @@
 \usepackage[ngerman]{babel}
 \usepackage{color}
 \usepackage[hidelinks]{hyperref}
-
-\usepackage[german]{assets/invoice}
+\usepackage{ifthen}
 
 \renewcommand{\familydefault}{\sfdefault}
 
-
+\include{assets/customer.tex}
 \include{assets/invoice_data.tex}
+\include{assets/personal_data.tex}
+\include{assets/fees.tex}
 
-\newcommand{\invoiceSalutation}{Sehr geehrte Damen und Herren,} % die Anrede
-% \newcommand{\invoiceSalutation}{Dear Sir oder Dear Madam,} % die Anrede
+\usepackage[\customerLanguage]{assets/invoice}
 
-\newcommand{\invoiceText}{für die von mir erbrachte Leistung erhalten Sie hiermit die Rechnung. Bitte zahlen Sie den unten aufgeführten Gesamtbetrag unter Angabe der Rechnungsnummer (\invoiceReference) bis zum \payDate \ auf das angegebene Konto ein.} % Rechnungstext
-% \newcommand{\invoiceText}{for the service provided by me, you hereby receive the invoice. Please pay the total amount listed below, stating the invoice number (\invoiceReference) by \payDate \ to the account indicated.} % Rechnungstext
 
 \newcommand{\invoiceEnclosures}{} % \encl{} einfügen
-
-\newcommand{\invoiceClosing}{Mit freundlichen Grüßen}
-% \newcommand{\invoiceClosing}{With kind regards}
-
-\include{assets/personal_data.tex}
-
-\include{assets/fees.tex}
 
 \setkomavar{fromname}{\senderName}
 \setkomavar{fromaddress}{\senderStreet \\ \senderZIP \ \senderCity}
@@ -37,12 +28,10 @@
 \setkomavar{date}{\invoiceDate}
 \setkomavar{frommobilephone}{\senderMobilephone}
 \setkomavar{fromemail}{\href{mailto:\senderEmail}{\nolinkurl{\senderEmail}}}
-\setkomavar{subject}{Rechnung}
-% \setkomavar{subject}{Invoice}
+\setkomavar{subject}{\InvoiceLabel}
 \setkomavar{location}{
   \\[\baselineskip] \\[\baselineskip]
-  \flushright \small {\vspace{1cm}Rechnungsnummer:
-%   \flushright \small {\vspace{1cm}Invoice number:
+  \flushright \small {\vspace{1cm}\InvoiceNumber:
   \invoiceReference}
 }
 
@@ -53,27 +42,22 @@
    \flushright
    \color[gray]{.3}%
 	\begin{tabular}{rl}
-		 Anschrift & \usekomavar{fromname}\\
-		%  Address & \usekomavar{fromname}\\
+		 \Address & \usekomavar{fromname}\\
 		 & \senderStreet\\
 		 & \senderZIP  \ \senderCity \\
 		 \\
-		 Mobil  & \usekomavar{frommobilephone} \\
-		 E-Mail  & \usekomavar{fromemail} \\
-		 Webseite & {\normalfont\ttfamily  \senderWeb } \\
+		 \Mobile  & \usekomavar{frommobilephone} \\
+		 \Email  & \usekomavar{fromemail} \\
+		 \Website & {\normalfont\ttfamily  \senderWeb } \\
 		 \\
-		 Steuernummer & \taxID \\
-		%  Tax number & \taxID \\
+		 \TaxNumber & \taxID \\
 		 \\
-		 Institut & \accountBankName \\
-		 IBAN & \accountIBAN \\
-		 BIC & \accountBIC
+		 \Institute & \accountBankName \\
+		 \IBAN & \accountIBAN \\
+		 \BIC & \accountBIC
 	\end{tabular}
    }%
 }
-
-\include{assets/customer.tex}
-
 
 \begin{document}
 	\begin{letter}{
@@ -89,16 +73,16 @@
 		\ifthenelse{\boolean{applyReverseChargeLaw}}
 			{\begin{invoice}{Euro}{0}}
 			{\begin{invoice}{Euro}{19}}
-			\ProjectTitle{Projekttitel} %
+			\ProjectTitle{\ProjectTitleLabel} %
 			\fees
 		\end{invoice}
-		Leistungszeitraum: \performancePeriod
+		\PerformancePeriodLabel: \performancePeriod
 
 		% \ps Im ausgewiesenen Betrag ist gemäß § 19 UStG keine Umsatzsteuer enthalten.
 		% \ps The amount shown does not include sales tax in accordance with § 19 UStG.
 
 		\ifthenelse{\boolean{applyReverseChargeLaw}}
-			  {\ps The reverse charge law applies to this customer.}
+			  {\ps \ReverseChargeLaw}
 			  {} % Add an empty block for the false condition
 
 		\renewcommand*{\raggedsignature}{\raggedright}

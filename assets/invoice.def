@@ -311,6 +311,22 @@
 	\def\SubtotalExpenses		{Zwischensumme \Expenses}%
 	\def\SubtotalProject		{Zwischensumme \Project}%
 	\def\Total			{Gesamtsumme}%
+	\def\invoiceSalutation		{Sehr geehrte Damen und Herren,}%
+	\def\invoiceText		{für die von mir erbrachte Leistung erhalten Sie hiermit die Rechnung. Bitte zahlen Sie den unten aufgeführten Gesamtbetrag unter Angabe der Rechnungsnummer (\invoiceReference) bis zum \payDate \ auf das angegebene Konto ein.}%
+	\def\invoiceClosing		{Mit freundlichen Grüßen}%
+	\def\Address			{Anschrift}%
+	\def\Mobile			{Mobil}%
+	\def\Email			{E-Mail}%
+	\def\Website			{Webseite}%
+	\def\TaxNumber			{Steuernummer}%
+	\def\Institute			{Institut}%
+	\def\IBAN			{IBAN}%
+	\def\BIC			{BIC}%
+	\def\PerformancePeriodLabel	{Leistungszeitraum}%
+	\def\ReverseChargeLaw		{Das Reverse-Charge-Verfahren gilt für diesen Kunden.}%
+	\def\InvoiceNumber		{Rechnungsnummer}%
+	\def\ProjectTitleLabel		{Projekttitel}%
+	\def\InvoiceLabel		{Rechnung}%
 \fi\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This is Italian.
@@ -451,6 +467,50 @@
 	\def\SubtotalExpenses		{Mellansumma \Expenses}%
 	\def\SubtotalProject		{Mellansumma \Project}%
 	\def\Total			{Slutsumma}%
+\fi\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is English.
+%
+\ifx\l@english\undefined
+	\message{^^J(invoice) \Warning:
+		Language \string\l@english\space unknown.^^J^^J}
+\else
+\ifnum\number\invoice@language=\number\l@english
+	\def\Warning			{Warning}%
+	\def\Error			{Error}%
+	\def\Expense			{Expense}%
+	\def\Amount			{Amount}%
+	\def\Currency			{Currency}%
+	\def\Factor			{Factor}%
+	\def\Activity			{Activity}%
+	\def\Count			{Count}%
+	\def\UnitRate			{Rate/Unit}%
+	\def\Fees			{Fees}%
+	\def\VAT			{VAT}%
+	\def\Expenses			{Expenses}%
+	\def\SumFees			{Sum \Fees}%
+	\def\SumVAT			{Sum \VAT}%
+	\def\SumExpenses		{Sum \Expenses}%
+	\def\SubtotalFee		{Subtotal \Fees}%
+	\def\SubtotalExpenses		{Subtotal \Expenses}%
+	\def\SubtotalProject		{Subtotal \Project}%
+	\def\Total			{Total}%
+	\def\invoiceSalutation		{Dear Sir or Madam,}%
+	\def\invoiceText		{For the service provided by me, you hereby receive the invoice. Please pay the total amount listed below, stating the invoice number (\invoiceReference) by \payDate \ to the account indicated.}%
+	\def\invoiceClosing		{With kind regards}%
+	\def\Address			{Address}%
+	\def\Mobile			{Mobile}%
+	\def\Email			{Email}%
+	\def\Website			{Website}%
+	\def\TaxNumber			{Tax number}%
+	\def\Institute			{Institute}%
+	\def\IBAN			{IBAN}%
+	\def\BIC			{BIC}%
+	\def\PerformancePeriodLabel	{Performance period}%
+	\def\ReverseChargeLaw		{The reverse charge law applies to this customer.}%
+	\def\InvoiceNumber		{Invoice Number}%
+	\def\ProjectTitleLabel		{Project Title}%
+	\def\InvoiceLabel		{Invoice}%
 \fi\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
