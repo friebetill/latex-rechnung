@@ -15,6 +15,10 @@ create_new_customer() {
   read -re customerZIP
   echo "Enter customer city:"
   read -re customerCity
+  echo "Enter customer country (leave empty if not applicable):"
+  read -re customerCountry
+  echo "Enter customer VAT number (leave empty if not applicable):"
+  read -re customerVAT
 
   echo "Apply reverse charge law? (yes/no):"
   read -re applyReverseChargeLaw
@@ -50,14 +54,17 @@ create_new_customer() {
   read -re fileName
 
   customerFile="assets/customers/${fileName}.tex"
-  echo "\\newcommand{\\customerCompany}{${customerCompany}} %ggf. Firma" >"${customerFile}"
+  echo "\\newcommand{\\customerLanguage}{${customerLanguage}}" >"${customerFile}"
+  echo "" >>"${customerFile}"
+  echo "\\newcommand{\\customerCompany}{${customerCompany}} %ggf. Firma" >>"${customerFile}"
   echo "\\newcommand{\\customerName}{${customerName}} % Name" >>"${customerFile}"
   echo "\\newcommand{\\customerStreet}{${customerStreet}} % Straße" >>"${customerFile}"
   echo "\\newcommand{\\customerZIP}{${customerZIP}} % Postleitzahl" >>"${customerFile}"
   echo "\\newcommand{\\customerCity}{${customerCity}} % Ort" >>"${customerFile}"
+  echo "\\newcommand{\\customerCountry}{${customerCountry}}" >>"${customerFile}"
+  echo "\\newcommand{\\customerVAT}{${customerVAT}} % VAT number" >>"${customerFile}"
   echo "\\newboolean{applyReverseChargeLaw}" >>"${customerFile}"
   echo "\\setboolean{applyReverseChargeLaw}{${applyReverseChargeLaw}}" >>"${customerFile}"
-  echo "\\newcommand{\\customerLanguage}{${customerLanguage}}" >>"${customerFile}"
 
   cp "${customerFile}" assets/customer.tex
 }
