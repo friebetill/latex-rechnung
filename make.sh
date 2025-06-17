@@ -134,9 +134,13 @@ prompt_fees_data() {
 
     echo "Enter hourly rate:"
     read -re hourlyRate
+    # Convert comma to period for LaTeX compatibility
+    hourlyRate=${hourlyRate//,/.}
 
     echo "Enter total duration (in decimal hours):"
     read -re totalDuration
+    # Convert comma to period for LaTeX compatibility
+    totalDuration=${totalDuration//,/.}
 
     echo "  \\Fee{${taskDescription}}{${hourlyRate}}{${totalDuration}}" >>"${fees_file}"
 
