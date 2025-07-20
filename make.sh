@@ -85,10 +85,6 @@ prompt_invoice_data() {
   local invoice_data_file="assets/invoice_data.tex"
 
   default_invoice_date=$(date +%d.%m.%Y)
-  # default_invoice_reference will be derived from the (possibly user-entered) invoice date below
-  start_week=$(date -v-2w +%Y-W%V)
-  end_week=$(date -v-1w +%Y-W%V)
-  default_performance_period="${start_week} - ${end_week}"
 
   invoiceDate=$(read_with_prefill "Enter invoice date: " "$default_invoice_date")
 
@@ -102,7 +98,10 @@ prompt_invoice_data() {
 
   invoiceReference=$(read_with_prefill "Enter invoice reference number: " "$default_invoice_reference")
 
-  performancePeriod=$(read_with_prefill "Enter performance period (format: YYYY-WXX - YYYY-WXX): " "$default_performance_period")
+  # Calculate default performance period (last 4 weeks before invoice date)
+  default_performance_period=$(calculate_performance_period "$invoiceDate")
+
+  performancePeriod=$(read_with_prefill "Enter performance period: " "$default_performance_period")
 
   echo "\\newcommand{\\invoiceDate}{${invoiceDate}} % Datum der rechnungsstellung" >"${invoice_data_file}"
   echo "\\newcommand{\\payDate}{${payDate}} % Datum der Zahlungsfrist (14 Tage nach Rechnungsstellung)" >>"${invoice_data_file}"
@@ -142,6 +141,28 @@ generate_invoice_reference() {
   d=$(printf "%02d" "$d")
   m=$(printf "%02d" "$m")
   echo "${y}${m}${d}-1"
+}
+
+calculate_performance_period() {
+  local inv="$1"
+
+  # Convert invoice date to epoch seconds
+  local inv_epoch
+  inv_epoch=$(date -j -f "%d.%m.%Y" "$inv" +%s 2>/dev/null) || inv_epoch=""
+
+  if [ -z "$inv_epoch" ]; then
+    echo ""  # return empty on parse failure
+    return
+  fi
+
+  local seconds_per_week=$((7*24*60*60))
+  local start_epoch=$((inv_epoch - 3*seconds_per_week))
+
+  local end_week start_week
+  end_week=$(date -j -r "$inv_epoch" +%Y-W%V)
+  start_week=$(date -j -r "$start_epoch" +%Y-W%V)
+
+  echo "${start_week} - ${end_week}"
 }
 
 move_timemator_data() {
