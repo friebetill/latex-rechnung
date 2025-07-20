@@ -85,7 +85,6 @@ prompt_invoice_data() {
   local invoice_data_file="assets/invoice_data.tex"
 
   default_invoice_date=$(date +%d.%m.%Y)
-  default_pay_date=$(date -v+1m +%d.%m.%Y)
   default_invoice_reference=$(date +%Y%m%d)-1
   start_week=$(date -v-2w +%Y-W%V)
   end_week=$(date -v-1w +%Y-W%V)
@@ -94,6 +93,9 @@ prompt_invoice_data() {
   echo "Enter invoice date (format: DD.MM.YYYY) [Default: $default_invoice_date]:"
   read -re invoiceDate
   invoiceDate=${invoiceDate:-$default_invoice_date}
+
+  # Calculate default payment due date (invoice date + 14 days)
+  default_pay_date=$(calculate_default_pay_date "$invoiceDate")
 
   echo "Enter payment due date (format: DD.MM.YYYY) [Default: $default_pay_date]:"
   read -re payDate
@@ -108,11 +110,34 @@ prompt_invoice_data() {
   performancePeriod=${performancePeriod:-$default_performance_period}
 
   echo "\\newcommand{\\invoiceDate}{${invoiceDate}} % Datum der rechnungsstellung" >"${invoice_data_file}"
-  echo "\\newcommand{\\payDate}{${payDate}} % Datum der Zahlungsfrist (30 Tage nach Rechnungsstellung)" >>"${invoice_data_file}"
+  echo "\\newcommand{\\payDate}{${payDate}} % Datum der Zahlungsfrist (14 Tage nach Rechnungsstellung)" >>"${invoice_data_file}"
   echo "\\newcommand{\\invoiceReference}{${invoiceReference}} % Rechnungsnummer (z.B. 20150122-4)" >>"${invoice_data_file}"
   echo "\\newcommand{\\performancePeriod}{${performancePeriod}} % Leistungszeitraum (z.B. 2022-W46 - 2022-W47)" >>"${invoice_data_file}"
 
   echo "Invoice data file created at ${invoice_data_file}"
+}
+
+calculate_default_pay_date() {
+  local inputDate="$1"
+
+  # Zero-pad day and month (e.g. 7.5.2025 → 07.05.2025)
+  IFS='.' read -r d m y <<< "$inputDate"
+  d=$(printf "%02d" "$d")
+  m=$(printf "%02d" "$m")
+  local padded="${d}.${m}.${y}"
+
+  # Add 14 days via epoch arithmetic
+  local seconds_in_14_days=$((14*24*60*60))
+  local epoch
+  epoch=$(date -j -f "%d.%m.%Y" "$padded" +%s 2>/dev/null) || epoch=""
+
+  if [ -n "$epoch" ]; then
+    local target=$((epoch + seconds_in_14_days))
+    date -j -r "$target" +"%d.%m.%Y"
+  else
+    # Fallback to padded input if parsing failed
+    echo "$padded"
+  fi
 }
 
 move_timemator_data() {
