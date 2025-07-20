@@ -54,17 +54,16 @@ create_new_customer() {
   read -r fileName
 
   customerFile="assets/customers/${fileName}.tex"
-  echo "\\newcommand{\\customerLanguage}{${customerLanguage}}" >"${customerFile}"
-  echo "" >>"${customerFile}"
-  echo "\\newcommand{\\customerCompany}{${customerCompany}} %ggf. Firma" >>"${customerFile}"
-  echo "\\newcommand{\\customerName}{${customerName}} % Name" >>"${customerFile}"
-  echo "\\newcommand{\\customerStreet}{${customerStreet}} % Straße" >>"${customerFile}"
-  echo "\\newcommand{\\customerZIP}{${customerZIP}} % Postleitzahl" >>"${customerFile}"
-  echo "\\newcommand{\\customerCity}{${customerCity}} % Ort" >>"${customerFile}"
-  echo "\\newcommand{\\customerCountry}{${customerCountry}}" >>"${customerFile}"
-  echo "\\newcommand{\\customerVAT}{${customerVAT}} % VAT number" >>"${customerFile}"
-  echo "\\newboolean{applyReverseChargeLaw}" >>"${customerFile}"
-  echo "\\setboolean{applyReverseChargeLaw}{${applyReverseChargeLaw}}" >>"${customerFile}"
+  printf '\\newcommand{\\customerLanguage}{%s}\n' "$customerLanguage" >"${customerFile}"
+  printf '\\newcommand{\\customerCompany}{%s} %%ggf. Firma\n' "$customerCompany" >>"${customerFile}"
+  printf '\\newcommand{\\customerName}{%s} %% Name\n' "$customerName" >>"${customerFile}"
+  printf '\\newcommand{\\customerStreet}{%s} %% Straße\n' "$customerStreet" >>"${customerFile}"
+  printf '\\newcommand{\\customerZIP}{%s} %% Postleitzahl\n' "$customerZIP" >>"${customerFile}"
+  printf '\\newcommand{\\customerCity}{%s} %% Ort\n' "$customerCity" >>"${customerFile}"
+  printf '\\newcommand{\\customerCountry}{%s}\n' "$customerCountry" >>"${customerFile}"
+  printf '\\newcommand{\\customerVAT}{%s} %% VAT number\n' "$customerVAT" >>"${customerFile}"
+  printf '\\newboolean{applyReverseChargeLaw}\n' >>"${customerFile}"
+  printf '\\setboolean{applyReverseChargeLaw}{%s}\n' "$applyReverseChargeLaw" >>"${customerFile}"
 
   cp "${customerFile}" assets/customer.tex
 }
@@ -103,10 +102,10 @@ prompt_invoice_data() {
 
   performancePeriod=$(read_with_prefill "Enter performance period: " "$default_performance_period")
 
-  echo "\\newcommand{\\invoiceDate}{${invoiceDate}} % Datum der rechnungsstellung" >"${invoice_data_file}"
-  echo "\\newcommand{\\payDate}{${payDate}} % Datum der Zahlungsfrist (14 Tage nach Rechnungsstellung)" >>"${invoice_data_file}"
-  echo "\\newcommand{\\invoiceReference}{${invoiceReference}} % Rechnungsnummer (z.B. 20150122-4)" >>"${invoice_data_file}"
-  echo "\\newcommand{\\performancePeriod}{${performancePeriod}} % Leistungszeitraum (z.B. 2022-W46 - 2022-W47)" >>"${invoice_data_file}"
+  printf '\\newcommand{\\invoiceDate}{%s} %% Datum der rechnungsstellung\n' "$invoiceDate" >"${invoice_data_file}"
+  printf '\\newcommand{\\payDate}{%s} %% Datum der Zahlungsfrist (14 Tage nach Rechnungsstellung)\n' "$payDate" >>"${invoice_data_file}"
+  printf '\\newcommand{\\invoiceReference}{%s} %% Rechnungsnummer (z.B. 20150122-4)\n' "$invoiceReference" >>"${invoice_data_file}"
+  printf '\\newcommand{\\performancePeriod}{%s} %% Leistungszeitraum (z.B. 2022-W46 - 2022-W47)\n' "$performancePeriod" >>"${invoice_data_file}"
 
   echo "Invoice data file created at ${invoice_data_file}"
 }
@@ -176,7 +175,7 @@ prompt_fees_data() {
   local fees_file="assets/fees.tex"
   local taskDescription hourlyRate totalDuration addMore="y"
 
-  echo "\\newcommand{\\fees}{" >"${fees_file}"
+  printf '\\newcommand{\\fees}{\n' >"${fees_file}"
 
   while [[ $addMore == "y" ]]; do
     echo "Enter task description:"
@@ -192,14 +191,14 @@ prompt_fees_data() {
     # Convert comma to period for LaTeX compatibility
     totalDuration=${totalDuration//,/.}
 
-    echo "  \\Fee{${taskDescription}}{${hourlyRate}}{${totalDuration}}" >>"${fees_file}"
+    printf '  \\Fee{%s}{%s}{%s}\n' "$taskDescription" "$hourlyRate" "$totalDuration" >>"${fees_file}"
 
     echo "Do you want to add another entry? (y/n):"
     read -r addMore
     addMore=${addMore:-n}
   done
 
-  echo "}" >>"${fees_file}"
+  printf '}\n' >>"${fees_file}"
 
   echo "Fees data file created at ${fees_file}"
 }
