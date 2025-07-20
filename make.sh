@@ -85,7 +85,7 @@ prompt_invoice_data() {
   local invoice_data_file="assets/invoice_data.tex"
 
   default_invoice_date=$(date +%d.%m.%Y)
-  default_invoice_reference=$(date +%Y%m%d)-1
+  # default_invoice_reference will be derived from the (possibly user-entered) invoice date below
   start_week=$(date -v-2w +%Y-W%V)
   end_week=$(date -v-1w +%Y-W%V)
   default_performance_period="${start_week} - ${end_week}"
@@ -94,7 +94,10 @@ prompt_invoice_data() {
   read -re invoiceDate
   invoiceDate=${invoiceDate:-$default_invoice_date}
 
-  # Calculate default payment due date (invoice date + 14 days)
+  # Produce default reference like YYYYMMDD-1 derived from the invoice date
+  default_invoice_reference=$(generate_invoice_reference "$invoiceDate")
+
+  # Calculate default payment due date based on the chosen invoice date
   default_pay_date=$(calculate_default_pay_date "$invoiceDate")
 
   echo "Enter payment due date (format: DD.MM.YYYY) [Default: $default_pay_date]:"
@@ -138,6 +141,15 @@ calculate_default_pay_date() {
     # Fallback to padded input if parsing failed
     echo "$padded"
   fi
+}
+
+generate_invoice_reference() {
+  # Convert DD.MM.YYYY → YYYYMMDD-1.
+  local inputDate="$1"
+  IFS='.' read -r d m y <<< "$inputDate"
+  d=$(printf "%02d" "$d")
+  m=$(printf "%02d" "$m")
+  echo "${y}${m}${d}-1"
 }
 
 move_timemator_data() {
