@@ -208,6 +208,12 @@ build_pdf() {
   echo "Press ENTER to build the pdf:"
   wait_for_enter
 
+  # Ensure lualatex is available
+  if ! command -v lualatex >/dev/null 2>&1; then
+    echo "Error: 'lualatex' command not found. Please install a TeX distribution (e.g., TeX Live or MacTeX) and ensure lualatex is in your PATH." >&2
+    return
+  fi
+
   lualatex assets/main.tex
 
   # Extract the invoice reference number from the LaTeX file using sed
@@ -220,12 +226,7 @@ build_pdf() {
     echo "Error: Invoice reference number not found. PDF not renamed."
   fi
 
-  rm assets/customer.tex
-  rm assets/fees.tex
-  rm assets/invoice_data.tex
-  rm main.out
-  rm main.log
-  rm main.aux
+  rm -f assets/customer.tex assets/fees.tex assets/invoice_data.tex main.out main.log main.aux
 }
 
 read_with_prefill() {
