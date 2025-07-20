@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 wait_for_enter() {
   read -r
@@ -90,9 +90,7 @@ prompt_invoice_data() {
   end_week=$(date -v-1w +%Y-W%V)
   default_performance_period="${start_week} - ${end_week}"
 
-  echo "Enter invoice date (format: DD.MM.YYYY) [Default: $default_invoice_date]:"
-  read -re invoiceDate
-  invoiceDate=${invoiceDate:-$default_invoice_date}
+  invoiceDate=$(read_with_prefill "Enter invoice date: " "$default_invoice_date")
 
   # Produce default reference like YYYYMMDD-1 derived from the invoice date
   default_invoice_reference=$(generate_invoice_reference "$invoiceDate")
@@ -100,17 +98,11 @@ prompt_invoice_data() {
   # Calculate default payment due date based on the chosen invoice date
   default_pay_date=$(calculate_default_pay_date "$invoiceDate")
 
-  echo "Enter payment due date (format: DD.MM.YYYY) [Default: $default_pay_date]:"
-  read -re payDate
-  payDate=${payDate:-$default_pay_date}
+  payDate=$(read_with_prefill "Enter payment due date: " "$default_pay_date")
 
-  echo "Enter invoice reference number [Default: $default_invoice_reference]:"
-  read -re invoiceReference
-  invoiceReference=${invoiceReference:-$default_invoice_reference}
+  invoiceReference=$(read_with_prefill "Enter invoice reference number: " "$default_invoice_reference")
 
-  echo "Enter performance period (format: YYYY-WXX - YYYY-WXX) [Default: $default_performance_period]:"
-  read -re performancePeriod
-  performancePeriod=${performancePeriod:-$default_performance_period}
+  performancePeriod=$(read_with_prefill "Enter performance period (format: YYYY-WXX - YYYY-WXX): " "$default_performance_period")
 
   echo "\\newcommand{\\invoiceDate}{${invoiceDate}} % Datum der rechnungsstellung" >"${invoice_data_file}"
   echo "\\newcommand{\\payDate}{${payDate}} % Datum der Zahlungsfrist (14 Tage nach Rechnungsstellung)" >>"${invoice_data_file}"
@@ -213,6 +205,37 @@ build_pdf() {
   rm main.out
   rm main.log
   rm main.aux
+}
+
+read_with_prefill() {
+  # Usage: var=$(read_with_prefill "Prompt" "defaultValue")
+  local prompt="$1"
+  local default_val="$2"
+
+  # If running under zsh, use 'vared' for inline editable default.
+  if [[ -n "$ZSH_VERSION" ]]; then
+    local __input="$default_val"
+    # vared prints the prompt itself; send directly to user terminal.
+    vared -p "$prompt" __input < /dev/tty >&2
+    echo "${__input:-$default_val}"
+    return
+  fi
+
+  # Bash 4+ supports -i with read for inline default.
+  if [[ -n "$BASH_VERSION" ]]; then
+    local major=${BASH_VERSINFO[0]}
+    if (( major >= 4 )); then
+      # shellcheck disable=SC2162
+      read -e -i "$default_val" -p "$prompt" REPLY < /dev/tty 1>&2
+      echo "${REPLY:-$default_val}"
+      return
+    fi
+  fi
+
+  # Generic fallback: show default in brackets and accept empty input.
+  printf "%s[Default: %s] " "$prompt" "$default_val" >&2
+  read -r REPLY < /dev/tty
+  echo "${REPLY:-$default_val}"
 }
 
 main() {
