@@ -6,22 +6,22 @@ wait_for_enter() {
 
 create_new_customer() {
   echo "Enter customer company name:"
-  read -re customerCompany
+  read -r customerCompany
   echo "Enter customer name:"
-  read -re customerName
+  read -r customerName
   echo "Enter customer street:"
-  read -re customerStreet
+  read -r customerStreet
   echo "Enter customer ZIP code:"
-  read -re customerZIP
+  read -r customerZIP
   echo "Enter customer city:"
-  read -re customerCity
+  read -r customerCity
   echo "Enter customer country (leave empty if not applicable):"
-  read -re customerCountry
+  read -r customerCountry
   echo "Enter customer VAT number (leave empty if not applicable):"
-  read -re customerVAT
+  read -r customerVAT
 
   echo "Apply reverse charge law? (yes/no):"
-  read -re applyReverseChargeLaw
+  read -r applyReverseChargeLaw
   if [ "$applyReverseChargeLaw" == "yes" ]; then
     applyReverseChargeLaw=true
   else
@@ -51,7 +51,7 @@ create_new_customer() {
   done
 
   echo "Enter file name for the new customer (without extension):"
-  read -re fileName
+  read -r fileName
 
   customerFile="assets/customers/${fileName}.tex"
   echo "\\newcommand{\\customerLanguage}{${customerLanguage}}" >"${customerFile}"
@@ -180,22 +180,22 @@ prompt_fees_data() {
 
   while [[ $addMore == "y" ]]; do
     echo "Enter task description:"
-    read -re taskDescription
+    read -r taskDescription
 
     echo "Enter hourly rate:"
-    read -re hourlyRate
+    read -r hourlyRate
     # Convert comma to period for LaTeX compatibility
     hourlyRate=${hourlyRate//,/.}
 
     echo "Enter total duration (in decimal hours):"
-    read -re totalDuration
+    read -r totalDuration
     # Convert comma to period for LaTeX compatibility
     totalDuration=${totalDuration//,/.}
 
     echo "  \\Fee{${taskDescription}}{${hourlyRate}}{${totalDuration}}" >>"${fees_file}"
 
     echo "Do you want to add another entry? (y/n):"
-    read -re addMore
+    read -r addMore
     addMore=${addMore:-n}
   done
 
