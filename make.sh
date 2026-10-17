@@ -37,7 +37,7 @@ create_new_customer() {
   select opt in "${options[@]}"; do
     case $REPLY in
       1) customerLanguage="english"; break ;;
-      2) customerLanguage="ngerman"; break ;;
+      2) customerLanguage="german"; break ;;
       3) customerLanguage="french"; break ;;
       4) customerLanguage="spanish"; break ;;
       5) customerLanguage="italian"; break ;;

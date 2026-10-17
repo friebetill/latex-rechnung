@@ -134,3 +134,6 @@ assets/personal_data.tex
 timemator_data.csv
 main.pdf
 
+
+# Generated invoices
+/[0-9]*-[0-9]*.pdf
